@@ -84,5 +84,5 @@ void ProcessChar()
          (digitalRead(Data6) << 6) +
          (digitalRead(Data7) << 7);
          
-  Serial.print((char)Char);
+  Serial.print(Char);
 }
