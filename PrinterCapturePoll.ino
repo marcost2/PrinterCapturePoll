@@ -63,10 +63,11 @@ void loop()
 {
   while (digitalRead(nStrobe) == HIGH) {
     digitalWrite(Busy, LOW);
-    digitalWrite(nAck,HIGH);
   }   
   digitalWrite(Busy, HIGH);
   ProcessChar();
+  digitalWrite(nAck,HIGH)
+  delay(100);
   digitalWrite(nAck,LOW);
   delay(5); //milliseconds. Specification minimum = 5 us
 }   
