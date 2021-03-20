@@ -50,13 +50,14 @@ void setup()
   pinMode(nAck, OUTPUT);
   pinMode(Busy, OUTPUT);
   pinMode(Select, INPUT_PULLUP);
- 
+  pinMode(SelectIn, OUTPUT)
   Serial.begin(9600);
   while (!Serial) {
     ;
   }
   delay(1000);
   Serial.println("Initialised");
+  digitalWrite(SelectIn, HIGH)
 }
 
 void loop()
