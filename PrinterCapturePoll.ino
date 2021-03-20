@@ -25,53 +25,47 @@
  *-------------------------------------------------------------------------------
  ********************************************************************************/
 
-int nStrobe = 2;
-int Data0   = 3;
-int Data1   = 4;
-int Data2   = 5;
-int Data3   = 6;
-int Data4   = 7;
-int Data5   = 8;
-int Data6   = 9;
-int Data7   = 10;
-int nAck    = 11;
-int Busy    = 12;
-int led     = 13; // use as status led
+int nStrobe  = 2;
+int Data0    = 3;
+int Data1    = 4;
+int Data2    = 5;
+int Data3    = 6;
+int Data4    = 7;
+int Data5    = 8;
+int Data6    = 9;
+int Data7    = 10;
+int nAck     = 11;
+int Busy     = 12;
+int Select   = 13; // use as status led
+int SelectIn = A5;
 
 void setup()
 {
   // Configure pins
   pinMode(nStrobe, INPUT_PULLUP);
  
-  for (int n = Data0; n < (Data7+1); n++)
+  for (int n = Data0; n <= (Data7); n++)
     pinMode(n, INPUT_PULLUP);
  
   pinMode(nAck, OUTPUT);
   pinMode(Busy, OUTPUT);
-  pinMode(led, OUTPUT);
+  pinMode(Select, INPUT_PULLUP);
  
   Serial.begin(9600);
   while (!Serial) {
     ;
   }
- 
-  State = READY;
   delay(1000);
   Serial.println("Initialised");
 }
-
-
-
 
 void loop()
 {
   while (digitalRead(nStrobe) == HIGH) {
     digitalWrite(Busy, LOW);
     digitalWrite(nAck,HIGH);
-    digitalWrite(led, HIGH);
   }   
   digitalWrite(Busy, HIGH);
-  digitalWrite(led, LOW);
   ProcessChar();
   digitalWrite(nAck,LOW);
   delay(5); //milliseconds. Specification minimum = 5 us
